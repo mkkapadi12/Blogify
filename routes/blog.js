@@ -39,10 +39,9 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", upload.single("coverImg"), async (req, res) => {
-  const { title, body } = req.body;
-  const blog = await Blog.create({
-    title,
-    body,
+  await Blog.create({
+    title: req.body.title,
+    body: req.body.body,
     createdBy: req.user._id,
     coverImgURL: `/uploads/${req.file.filename}`,
   });
